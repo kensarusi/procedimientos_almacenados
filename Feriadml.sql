@@ -1,9 +1,12 @@
-DELIMITER 
+USE Ferias;
+GO
 
-CREATE PROCEDURE cargarDatosNuevos()
+CREATE OR ALTER PROCEDURE cargarDatosNuevos
+AS
 BEGIN
+    SET NOCOUNT ON;
 
-    INSERT INTO Feria (id, nombre, ciudad, fecha_inicio, fecha_fin, cantidadPabellones)
+    INSERT INTO Feria (id, nombre, ciudad, fecha_inicio, fecha_fin, cantidadPab)
     VALUES
         (1, 'ExpoInnovación 2025', 'Medellín', '2025-03-10', '2025-03-12', 2),
         (2, 'AgroFuturo', 'Bogotá', '2025-05-05', '2025-05-07', 3),
@@ -69,18 +72,18 @@ BEGIN
         (2, 'Premium', 'Acceso total + talleres prácticos'),
         (3, 'Estudiante', 'Acceso a pabellones y zona académica');
 
-    INSERT INTO Visitante (id, nombre, tipoRegistro, telefono, id_tipoEntrada)
+    INSERT INTO Visitante (id, nombre, telefono, tipoRegistro, id_tipoEntrada)
     VALUES
-        (1,'Andrés López', 'En línea', '3211111111', 1),
-        (2,'Mariana Torres', 'Presencial', '3222222222', 2),
-        (3,'Julián Gómez', 'En línea', '3233333333', 3),
-        (4,'Natalia Ruiz','Presencial','3244444444', 1),
-        (5,'Camila Soto','En línea','3255555555', 2),
-        (6,'Pedro Ramírez','Presencial','3266666666', 3),
-        (7,'Santiago Vargas','Presencial','3277777777', 1),
-        (8,'Laura Fernández','En línea','3288888888', 3),
-        (9,'Felipe Morales','Presencial','3299999999', 2),
-        (10,'Daniela Quintero','En línea','3300000000', 1);
+        (1,'Andrés López', '3211111111','En línea', 1),
+        (2,'Mariana Torres', '3222222222','Presencial', 2),
+        (3,'Julián Gómez', '3233333333','En línea', 3),
+        (4,'Natalia Ruiz','3244444444','Presencial', 1),
+        (5,'Camila Soto','3255555555','En línea', 2),
+        (6,'Pedro Ramírez','3266666666','Presencial', 3),
+        (7,'Santiago Vargas','3277777777','Presencial', 1),
+        (8,'Laura Fernández','3288888888','En línea', 3),
+        (9,'Felipe Morales','3299999999','Presencial', 2),
+        (10,'Daniela Quintero','3300000000','En línea', 1);
 
     INSERT INTO PonenteCharla (id, nombre, especialidad)
     VALUES
@@ -95,18 +98,18 @@ BEGIN
         (9,'Ing. Paula Mendoza', 'Impresión 3D'),
         (10,'Dr. Ricardo Castillo','Big Data y Análisis');
 
-    INSERT INTO Charlas (id, tematica, id_empresa, id_ponente, fecha)
+    INSERT INTO Charlas (id, tematica, fecha, id_empresa, id_ponente)
     VALUES
-        (1,'Robots en la Industria', 1, 1, '2025-03-10 10:00:00'),
-        (2,'Agricultura Inteligente', 2, 2, '2025-03-10 12:00:00'),
-        (3,'Paneles Solares Avanzados', 9, 3, '2025-03-11 09:00:00'),
-        (4,'Cerebro y Tecnología', 4, 4, '2025-03-11 11:00:00'),
-        (5,'Nanomedicina del Futuro', 6, 5, '2025-03-11 14:00:00'),
-        (6,'STEM en las Escuelas', 5, 6, '2025-03-11 16:00:00'),
-        (7,'Seguridad Digital', 10, 7, '2025-03-12 10:00:00'),
-        (8,'Avances en Biotecnología', 3, 8, '2025-03-12 12:00:00'),
-        (9,'Impresión 3D y Salud', 8, 9, '2025-03-12 15:00:00'),
-        (10,'Big Data para Negocios', 10, 10, '2025-03-12 17:00:00');
+        (1,'Robots en la Industria','2025-03-10 10:00:00', 1, 1),
+        (2,'Agricultura Inteligente','2025-03-10 12:00:00', 2, 2),
+        (3,'Paneles Solares Avanzados','2025-03-11 09:00:00', 9, 3),
+        (4,'Cerebro y Tecnología','2025-03-11 11:00:00', 4, 4),
+        (5,'Nanomedicina del Futuro','2025-03-11 14:00:00', 6, 5),
+        (6,'STEM en las Escuelas','2025-03-11 16:00:00', 5, 6),
+        (7,'Seguridad Digital','2025-03-12 10:00:00', 10, 7),
+        (8,'Avances en Biotecnología','2025-03-12 12:00:00', 3, 8),
+        (9,'Impresión 3D y Salud','2025-03-12 15:00:00', 8, 9),
+        (10,'Big Data para Negocios','2025-03-12 17:00:00', 10, 10);
 
     INSERT INTO Charla_Visitante (id_charla, id_visitante)
     VALUES
@@ -118,7 +121,5 @@ BEGIN
         (1,1,1),(2,2,1),(3,3,2),
         (4,4,2),(5,5,3),(6,6,4),
         (7,7,5),(8,8,6),(9,9,7),(10,10,8);
-
-END 
-
-DELIMITER ;
+END;
+GO
