@@ -1,6 +1,5 @@
-DELIMITER 
-
-CREATE PROCEDURE ejecutarConsultas()
+CREATE PROCEDURE ejecutarConsultas
+AS
 BEGIN
 
     SELECT 
@@ -17,7 +16,7 @@ BEGIN
         tip.nombre          AS entrada,
         cha.tematica        AS charla_tema,
         pon.nombre          AS ponente
-    FROM charla_visitante chv
+    FROM Charla_Visitante chv
     JOIN Visitante vis     ON chv.id_visitante = vis.id
     JOIN TipoEntrada tip   ON vis.id_tipoEntrada = tip.id
     JOIN Charlas cha       ON chv.id_charla = cha.id
@@ -30,7 +29,5 @@ BEGIN
     FROM Prototipo prot
     JOIN Responsable resp  ON prot.id_responsable = resp.id
     JOIN Empresa emp       ON prot.id_empresa     = emp.id;
-
-END 
-
-DELIMITER ;
+END;
+GO
